@@ -1,4 +1,4 @@
-
+<!-- Deconnexion à GSB -->
 <ul>
 <?php
 	  $id = $_SESSION['idVisiteur'];
