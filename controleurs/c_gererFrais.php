@@ -9,9 +9,9 @@ $action = $_REQUEST['action'];
 
 switch($action){
 	case 'saisirFrais':{
-	
+
 		if($pdo->estPremierFraisMois($idVisiteur,$mois)){
-		
+
 			$pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
 		}
 		break;
@@ -31,12 +31,13 @@ switch($action){
 		$dateFrais = $_REQUEST['dateFrais'];
 		$libelle = $_REQUEST['libelle'];
 		$montant = $_REQUEST['montant'];
-		valideInfosFrais($dateFrais,$libelle,$montant);
+        $paiement = $_REQUEST['paiement'];
+		valideInfosFrais($dateFrais,$libelle,$montant,$paiement);
 		if (nbErreurs() != 0 ){
 			include("vues/v_erreurs.php");
 		}
 		else{
-			$pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant);
+			$pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant,$paiement);
 		}
 		break;
 	}
@@ -47,8 +48,10 @@ switch($action){
 	}
 }
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
-$lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
+$lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur,$mois);
+$lesModesDePaiements = $pdo->modePaiement();
 include("vues/v_listeFraisForfait.php");
 include("vues/v_listeFraisHorsForfait.php");
+
 
 ?>

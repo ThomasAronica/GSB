@@ -1,41 +1,53 @@
-﻿ <div id="contenu">
-      <h2>Mes fiches de frais</h2>
-      <h3>Mois à sélectionner : </h3>
-      <form action="index.php?uc=etatFrais&action=voirEtatFrais" method="post">
-      <div class="corpsForm">
-         
-      <p>
-	 
-        <label for="lstMois" accesskey="n">Mois : </label>
-        <select id="lstMois" name="lstMois">
-            <?php
-			foreach ($lesMois as $unMois)
-			{
-			    $mois = $unMois['mois'];
-				$numAnnee =  $unMois['numAnnee'];
-				$numMois =  $unMois['numMois'];
-				if($mois == $moisASelectionner){
-				?>
-				<option selected value="<?php echo $mois ?>"><?php echo  $numMois."/".$numAnnee ?> </option>
-				<?php 
-				}
-				else{ ?>
-				<option value="<?php echo $mois ?>"><?php echo  $numMois."/".$numAnnee ?> </option>
-				<?php 
-				}
-			
-			}
-           
-		   ?>    
-            
-        </select>
-      </p>
-      </div>
-      <div class="piedForm">
-      <p>
-        <input id="ok" type="submit" value="Valider" size="20" />
-        <input id="annuler" type="reset" value="Effacer" size="20" />
-      </p> 
-      </div>
-        
-      </form>
+<div class="sommaire">
+<?php
+//Liste des mois dans le mois à sélectionner
+$mouths = array(
+    '01' => 'janvier',
+    '02' => 'fevrier',
+    '03' => 'mars',
+    '04' => 'avril',
+    '05' => 'mai',
+    '06' => 'juin',
+    '07' => 'juillet',
+    '08' => 'aout',
+    '09' => 'septembre',
+    '10' => 'octobre',
+    '11' => 'novembre',
+    '12' => 'decembre',
+);
+?>
+<br>
+<br>
+<!--Affiche chaque renseignement venant du mois choisi -->
+<div class="container">
+    <div class="jumbotron">
+        <div class="container">
+            <h2 class="titre2" style="text-align: center;">Mes fiches de frais</h2>
+            <h3 class="titre2">Mois à sélectionner :</h3>
+            <form action="index.php?uc=etatFrais&action=voirEtatFrais" method="post">
+                <label for="lstMois" accesskey="n">Mois : </label>
+                <select class="form-control" id="lstMois" name="lstMois">
+                <?php
+                //Menu déroulant sur le mois à selectionner, affiche le mois actuel
+                    foreach ($lesMois as $unMois) {
+                        $mois = $unMois['mois'];
+                        $numAnnee = $unMois['numAnnee'];
+                        if($mois == $moisASelectionner) {
+                            ?>
+                            <option selected value="<?php echo $mois ?>"><?php echo $mouths[$mois]; ?></option>
+                            <?php
+                        } else { ?>
+                            <option value="<?php echo $mois ?>"><?php echo $mouths[$mois]; ?></option>
+                            <?php
+                        }
+                    }
+                ?>
+                </select>
+                <br>
+                <div class="bouton">
+                <div style="float: right;">
+                    <button class="btn btn-outline-primary" id="ajouter" type="submit" value="Ajouter">Afficher</button>
+                </div>
+              </div>
+            </form>
+            <br>

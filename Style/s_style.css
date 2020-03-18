@@ -1,0 +1,24 @@
+/* affiche le texte en corps 16px lorsque le média dispose d'une largeur d'affichage au minimum de 780px */
+@media (max-width: 780px) {
+  .titre {
+    font-size:25px;
+  }
+  .image {
+    width: 150px;
+    length: 150px;
+  }
+  .sommaire{
+    font-size: 15px;
+  }
+  .titre2 {
+    font-size:20px;
+  }
+  .titre3 {
+    font-size:15px;
+  }
+  .texte {
+    font-size: 10px;
+  }
+
+
+}

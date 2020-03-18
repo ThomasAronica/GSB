@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `Etat` (
 CREATE TABLE IF NOT EXISTS `Visiteur` (
   `id` char(4) NOT NULL,
   `nom` char(30) DEFAULT NULL,
-  `prenom` char(30)  DEFAULT NULL, 
+  `prenom` char(30)  DEFAULT NULL,
   `login` char(20) DEFAULT NULL,
   `mdp` char(20) DEFAULT NULL,
   `adresse` char(30) DEFAULT NULL,
@@ -99,6 +99,20 @@ CREATE TABLE IF NOT EXISTS `LigneFraisForfait` (
   FOREIGN KEY (`idFraisForfait`) REFERENCES FraisForfait(`id`)
 ) ENGINE=InnoDB;
 
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ModeDePaiement`
+--
+
+CREATE TABLE IF NOT EXISTS `ModeDePaiement` (
+  `id` int(11) NOT NULL auto_increment,
+  `modePaiement` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+
 -- --------------------------------------------------------
 
 --
@@ -112,6 +126,8 @@ CREATE TABLE IF NOT EXISTS `LigneFraisHorsForfait` (
   `libelle` varchar(100) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `montant` decimal(10,2) DEFAULT NULL,
+  `idpaiement` int(11) NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (`idVisiteur`, `mois`) REFERENCES FicheFrais(`idVisiteur`, `mois`)
+  FOREIGN KEY (`idVisiteur`, `mois`) REFERENCES FicheFrais(`idVisiteur`, `mois`),
+  FOREIGN KEY (`idpaiement`) REFERENCES ModeDePaiement(`id`)
 ) ENGINE=InnoDB;

@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+//Validation de la connexion
 if(!isset($_REQUEST['action'])){
 	$_REQUEST['action'] = 'demandeConnexion';
 }

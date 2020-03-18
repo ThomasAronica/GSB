@@ -24,10 +24,22 @@ INSERT INTO `Etat` (`id`, `libelle`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Contenu de la table `ModeDePaiement`
+--
+
+INSERT INTO `ModeDePaiement` (`id`, `modePaiement`) VALUES
+('1', 'Chèque'),
+('2', 'Espèces'),
+('3', 'Carte Bancaire');
+
+-- --------------------------------------------------------
+
+--
 -- Contenu de la table `Visiteur`
 --
 
 INSERT INTO `Visiteur` (`id`, `nom`, `prenom`, `login`, `mdp`, `adresse`, `cp`, `ville`, `dateEmbauche`) VALUES
+('a895','admin','admin','admin','admin','admin','admin','admin','2019-11-20'),
 ('a131', 'Villechalane', 'Louis', 'lvillachane', 'jux7g', '8 rue des Charmes', '46000', 'Cahors', '2005-12-21'),
 ('a17', 'Andre', 'David', 'dandre', 'oppg5', '1 rue Petit', '46200', 'Lalbenque', '1998-11-23'),
 ('a55', 'Bedos', 'Christian', 'cbedos', 'gmhxd', '1 rue Peranud', '46250', 'Montcuq', '1995-01-12'),
@@ -54,5 +66,6 @@ INSERT INTO `Visiteur` (`id`, `nom`, `prenom`, `login`, `mdp`, `adresse`, `cp`, 
 ('e52', 'Eynde', 'Valérie', 'veynde', 'i7sn3', '3 Grand Place', '13015', 'Marseille', '1999-11-01'),
 ('f21', 'Finck', 'Jacques', 'jfinck', 'mpb3t', '10 avenue du Prado', '13002', 'Marseille', '2001-11-10'),
 ('f39', 'Frémont', 'Fernande', 'ffremont', 'xs5tq', '4 route de la mer', '13012', 'Allauh', '1998-10-01'),
-('f4', 'Gest', 'Alain', 'agest', 'dywvt', '30 avenue de la mer', '13025', 'Berre', '1985-11-01');
+('f4', 'Gest', 'Alain', 'agest', 'dywvt', '30 avenue de la mer', '13025', 'Berre', '1985-11-01'),
+('e10', 'Denot', 'Emilien', 'emilien', 'emilien', '26 rue Charles de Gaulle', '42000', 'Saint-Étienne', '2019-04-09');
 -- --------------------------------------------------------

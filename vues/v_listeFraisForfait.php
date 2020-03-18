@@ -1,40 +1,40 @@
-<div id="contenu">
-      <h2>Renseigner ma fiche de frais du mois <?php echo $numMois."-".$numAnnee ?></h2>
-         
-      <form method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
-      <div class="corpsForm">
-          
-          <fieldset>
-            <legend>Eléments forfaitisés
-            </legend>
-			<?php
-				foreach ($lesFraisForfait as $unFrais)
-				{
-					$idFrais = $unFrais['idfrais'];
-					$libelle = $unFrais['libelle'];
-					$quantite = $unFrais['quantite'];
-			?>
-					<p>
-						<label for="idFrais"><?php echo $libelle ?></label>
-						<input type="text" id="idFrais" name="lesFrais[<?php echo $idFrais?>]" size="10" maxlength="5" value="<?php echo $quantite?>" >
-					</p>
-			
-			<?php
-				}
-			?>
-			
-			
-			
-			
-           
-          </fieldset>
-      </div>
-      <div class="piedForm">
-      <p>
-        <input id="ok" type="submit" value="Valider" size="20" />
-        <input id="annuler" type="reset" value="Effacer" size="20" />
-      </p> 
-      </div>
-        
-      </form>
-  
+<div class="sommaire">
+<!--Affiche le formulaire de frais de forfait-->
+<br>
+<br>
+<div class="sommaire">
+<div class="container">
+    <div class="jumbotron">
+        <div class="container">
+          <h2 class ="titre" style="text-align: center;">Renseigner ma fiche de frais du <?php echo $numMois."/".$numAnnee ?></h2>
+
+<form method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
+    <br>
+    <h3 class="titre">Eléments forfaitisés</h3>
+    <div class="form-group">
+        <?php
+        foreach ($lesFraisForfait as $unFrais)
+        {
+        //recupere les elements
+        $idFrais = $unFrais['idfrais'];
+        $libelle = $unFrais['libelle'];
+        $quantite = $unFrais['quantite'];
+        ?>
+        <!--Affiche les frais -->
+        <label for="idFrais"><?php echo $libelle ?></label><br>
+        <input type="text" id="idFrais" class="form-control" name="lesFrais[<?php echo $idFrais?>]" value="<?php echo $quantite?>" >
+        <br>
+
+        <?php
+        }
+        ?>
+    </div>
+    <div style="float: right;">
+        <button class="btn btn-outline-primary" id="ok" type="submit" value="Valider">Valider</button>
+        <button class="btn btn-outline-secondary" id="annuler" type="reset" value="Effacer">Annuler</button>
+    </div>
+</form>
+<br>
+<br>
+</div>
+</div>

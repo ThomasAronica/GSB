@@ -1,63 +1,96 @@
-﻿
-<table class="listeLegere">
-  	   <caption>Descriptif des éléments hors forfait
-       </caption>
-             <tr>
-                <th class="date">Date</th>
-				<th class="libelle">Libellé</th>  
-                <th class="montant">Montant</th>  
-                <th class="action">&nbsp;</th>              
-             </tr>
-          
-    <?php    
-	    foreach( $lesFraisHorsForfait as $unFraisHorsForfait) 
-		{
-			$libelle = $unFraisHorsForfait['libelle'];
-			$date = $unFraisHorsForfait['date'];
-			$montant=$unFraisHorsForfait['montant'];
-			$id = $unFraisHorsForfait['id'];
-	?>		
-            <tr>
-                <td> <?php echo $date ?></td>
-                <td><?php echo $libelle ?></td>
-                <td><?php echo $montant ?></td>
-                <td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
-				onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
-             </tr>
-	<?php		 
-          
-          }
-	?>	  
-                                          
-    </table>
-      <form action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
-      <div class="corpsForm">
-         
-          <fieldset>
-            <legend>Nouvel élément hors forfait
-            </legend>
-            <p>
-              <label for="txtDateHF">Date (jj/mm/aaaa): </label>
-              <input type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
-            </p>
-            <p>
-              <label for="txtLibelleHF">Libellé</label>
-              <input type="text" id="txtLibelleHF" name="libelle" size="70" maxlength="256" value="" />
-            </p>
-            <p>
-              <label for="txtMontantHF">Montant : </label>
-              <input type="text" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" />
-            </p>
-          </fieldset>
-      </div>
-      <div class="piedForm">
-      <p>
-        <input id="ajouter" type="submit" value="Ajouter" size="20" />
-        <input id="effacer" type="reset" value="Effacer" size="20" />
-      </p> 
-      </div>
-        
-      </form>
-  </div>
-  
+<!--Affiche les hors forfaits-->
+<div class="sommaire">
+<h4>Descriptif des éléments hors forfait</h4>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+          <!--Tableau sur l'affichage-->
+            <th scope="col">Date</th>
+            <th scope="col">Libellé</th>
+            <th scope="col">Montant</th>
+            <th scope="col">Mode de paiement</th>
+            <th scope="col">&nbsp</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
 
+
+        foreach( $lesFraisHorsForfait as $unFraisHorsForfait)
+        {
+          $idpaiement = $unFraisHorsForfait['idpaiement'];
+
+          foreach($lesModesDePaiements as $unModeDePaiement){
+            if($unModeDePaiement['idPaiement'] == $idpaiement){
+              $libellePaiement = $unModeDePaiement['modePaiement'];
+            }elseif ($unModeDePaiement['idPaiement'] == NULL) {
+              echo "";
+            }
+          }
+
+
+            $libelle = $unFraisHorsForfait['libelle'];
+            $date = $unFraisHorsForfait['date'];
+            $montant = $unFraisHorsForfait['montant'];
+            $id = $unFraisHorsForfait['id'];
+            ?>
+            <tr>
+              <!--Affiche les valeurs sous le tableau créé plus haut -->
+                <td> <?php echo $date; ?></td>
+                <td><?php echo $libelle; ?></td>
+                <td><?php echo $montant; ?> €</td>
+                <td>
+                    <?php
+
+                        echo $libellePaiement;
+                        ?>
+                </td>
+                <td style="float:right;"><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>"
+                       onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
+            </tr>
+        <?php
+
+        }
+
+
+        ?>
+    </tbody>
+</table>
+<!--Formulaire sur la création d'un hors forfait -->
+<form action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
+    <div class="corpsForm">
+        <h4>Nouvel élément hors forfait</h4>
+        <div class="form-group">
+            <label for="txtDateHF">Date (jj/mm/aaaa): </label>
+            <input class="form-control" type="text" id="txtDateHF" name="dateFrais" size="10" maxlength="10" value=""  />
+        </div>
+        <div class="form-group">
+            <label for="txtLibelleHF">Libellé :</label>
+            <input class="form-control" type="text" id="txtLibelleHF" name="libelle" size="70" maxlength="256" value="" />
+        </div>
+        <div class="form-group">
+            <label for="txtMontantHF">Montant : </label>
+            <input class="form-control" type="text" id="txtMontantHF" name="montant" size="10" maxlength="10" value="" />
+        </div>
+        <div class="form-group">
+            <label>Mode de paiement : </label>
+            <select class="form-control" id="txtpaiementHF" name="paiement">
+                <?php
+                //Affiche le mode de paiement venant de la table ModeDePaiement
+                    foreach($lesModesDePaiements as $unModeDePaiement) {
+                        $idPaiement = $unModeDePaiement['idPaiement'];
+                        $libelle = $unModeDePaiement['modePaiement'];
+
+                        echo "<option value='$idPaiement'>" . $libelle . "</option>";
+                    }
+                ?>
+            </select>
+        </div>
+    </div>
+    <div style="float:right; margin-bottom: 4rem;">
+        <button class="btn btn-outline-primary" id="ajouter" type="submit" value="Ajouter">Ajouter</button>
+        <button class="btn btn-outline-secondary" id="effacer" type="reset" value="Effacer">Effacer</button>
+    </div>
+  </div>
+</form>
+<br>
